@@ -1,0 +1,40 @@
+html{
+    background-image: url(../CSS/img/fondo.jpg); 
+    background-size: cover;
+    /* background-color: red; */
+    padding-top: 8rem;
+}
+
+.inicios{
+    border-style: solid;
+    border-color: red 2px;
+    padding: 0.5rem;
+    background-color: white;
+    margin: auto;
+    width: 40%;
+    text-align: center;
+}
+
+.formulario{
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+.boton1{
+    width: 50%;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+.boton2{
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    width: 50%;
+}
+
+.espacio{
+    height: 2rem;
+}
