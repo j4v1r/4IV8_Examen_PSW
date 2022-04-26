@@ -1,0 +1,18 @@
+html{
+    background-image: url(../CSS/img/fondo.jpg); 
+    background-size: cover;
+    /* background-color: red; */
+    padding-top: 8rem;
+}
+
+.inicios{
+    margin-top: 8rem;
+    border-style: solid;
+    border-color: red 2px;
+    padding: 0.5rem;
+    background-color: white;
+    margin: auto;
+    width: 40%;
+    text-align: center;
+    align-items: center;
+}
