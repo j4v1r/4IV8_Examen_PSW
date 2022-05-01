@@ -12,22 +12,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="CSS/LBD.css">
     </head>
     <body>
         
-        <table border="2">
+        <h1>Laboratorio de Base de Datos</h1>
+        
+        <table border="2" class="LBD">
             <thead>
                 <tr>
                     <th>ID_Reporte</th>
                     <th>Fecha</th>
                     <th>Hora</th>
-                    <th>Estado Reporte</th>
-                    <th>Prioridad</th>
+                    <th>Problema</th>
+                    <th>Estado</th>
                     <th>Asignatura</th>
-                    <th>Persona</th>
-                    <th>Equipo</th>
                     <th>Grupo</th>
-                    <th>Descripción</th>
+                    <th>Prioridad</th>
+                    <th>Persona</th>
+                    <th>Etiqueta Equipo</th>
                     <th>Editar</th>
                     <th>Borrar</th>
                 </tr>        
@@ -55,7 +58,11 @@
                 con = DriverManager.getConnection(url, username, password);
                 
                 try{
-                    String q = "select * from dreporte natural join mequipo natural join claboratorio where tipo_lab like 'LBD%'";
+                    String q = "select id_dreporte as 'Reporte',fecha as 'Fecha', hora as 'Hora', problema as 'Problema', tipo as 'Estado', "
+                            + "nombre as 'Asignatura', nombre_grupo as 'Grupo', tipo_prioridad as 'Prioridad', nombre_persona as 'Persona', "
+                            + "mequipo_id_equipo as 'Etiqueta Equipo' from dreporte left join cestadoreporte on cestadoreporte_id_cer=id_cer "
+                            + "left join casignatura on casignatura_id_asignatura=id_asignatura left join cgrupo on cgrupo_id_grupo=id_grupo"
+                            + " left join cprioridad on cprioridad_id_prioridad=id_prioridad left join mpersona on mpersona_numero_empleado=numero_empleado";
                     
                     set = con.createStatement();
                     
@@ -67,18 +74,18 @@
                     
                     %>
                     <tr>
-                        <td><%=rs.getInt("id_dreporte")%></td>
-                        <td><%=rs.getString("fecha")%></td>
-                        <td><%=rs.getString("hora")%></td>
-                        <td><%=rs.getString("CestadoReporte_id_cer")%></td>
-                        <td><%=rs.getString("CPrioridad_id_prioridad")%></td>
-                        <td><%=rs.getInt("Casignatura_id_asignatura")%></td>
-                        <td><%=rs.getString("MPersona_numero_empleado")%></td>
-                        <td><%=rs.getString("MEquipo_id_equipo")%></td>
-                        <td><%=rs.getString("Cgrupo_id_grupo")%></td>
-                        <td><%=rs.getString("problema")%></td>
-                        <td><a href="editaralumno.jsp?id=<%=rs.getInt("id_dreporte")%>" >Editar</a></td>
-                        <td><a href="borraralumno.jsp?id=<%=rs.getInt("id_dreporte")%>" >Borrar</a></td>
+                        <td><%=rs.getInt("Reporte")%></td>
+                        <td><%=rs.getString("Fecha")%></td>
+                        <td><%=rs.getString("Hora")%></td>
+                        <td><%=rs.getString("Estado")%></td>
+                        <td><%=rs.getString("Problema")%></td>
+                        <td><%=rs.getString("Asignatura")%></td>
+                        <td><%=rs.getString("Grupo")%></td>
+                        <td><%=rs.getString("Prioridad")%></td>
+                        <td><%=rs.getString("Persona")%></td>
+                        <td><%=rs.getString("Etiqueta Equipo")%></td>
+                        <td><a href="editaralumno.jsp?id=<%=rs.getInt("Reporte")%>">Editar</a></td>
+                        <td><a href="borraralumno.jsp?id=<%=rs.getInt("Reporte")%>">Borrar</a></td>
                     </tr>
                     <%
                         }
