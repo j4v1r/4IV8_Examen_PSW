@@ -1,0 +1,107 @@
+CREATE VIEW `muestrareporte` AS
+    SELECT 
+        `dreporte`.`detalleReporte_id` AS `detalleReporte_id`,
+        `dreporte`.`prioridad_id` AS `prioridad_id`,
+        `dreporte`.`edoRe_id` AS `edoRe_id`,
+        `dreporte`.`asignatura_id` AS `asignatura_id`,
+        `dreporte`.`persona_id` AS `persona_id`,
+        `dreporte`.`equipo_etiqueta` AS `equipo_etiqueta`,
+        `dreporte`.`detalleReporte_fecha` AS `detalleReporte_fecha`,
+        `dreporte`.`detalleReporte_hora` AS `detalleReporte_hora`,
+        `dreporte`.`problema` AS `problema`,
+        `cprioridad`.`prioridad_tipo` AS `prioridad_tipo`,
+        `cestadoreporte`.`edoRe_tipo` AS `edoRe_tipo`,
+        `casignatura`.`asignatura_nombre` AS `asignatura_nombre`,
+        `mpersona`.`persona_nombre` AS `persona_nombre`,
+        `claboratorio`.`lab_nom` AS `lab_nom`,
+        `cgrupo`.`grupo_tipo` AS `grupo_tipo`
+    FROM
+        (((((((`dreporte`
+        JOIN `cprioridad` ON ((`cprioridad`.`prioridad_id` = `dreporte`.`prioridad_id`)))
+        JOIN `cestadoreporte` ON ((`cestadoreporte`.`edoRe_id` = `dreporte`.`edoRe_id`)))
+        JOIN `casignatura` ON ((`casignatura`.`asignatura_id` = `dreporte`.`asignatura_id`)))
+        JOIN `mpersona` ON ((`mpersona`.`persona_id` = `dreporte`.`persona_id`)))
+        JOIN `cgrupo` ON ((`mpersona`.`grupo_id` = `cgrupo`.`grupo_id`)))
+        JOIN `dequipo` ON ((`dequipo`.`equipo_etiqueta` = `dreporte`.`equipo_etiqueta`)))
+        JOIN `claboratorio` ON ((`dequipo`.`lab_id` = `claboratorio`.`lab_id`)))
+
+
+
+CREATE VIEW `personamuestra` AS
+    SELECT 
+        `mpersona`.`persona_id` AS `persona_id`,
+        `mpersona`.`identificador` AS `identificador`,
+        `mpersona`.`persona_nombre` AS `persona_nombre`,
+        `mpersona`.`persona_appat` AS `persona_appat`,
+        `mpersona`.`persona_apmat` AS `persona_apmat`,
+        `mpersona`.`persona_sexo` AS `persona_sexo`,
+        `mpersona`.`persona_fechaNacimiento` AS `persona_fechaNacimiento`,
+        `mpersona`.`persona_user` AS `persona_user`,
+        `mpersona`.`persona_pass` AS `persona_pass`,
+        `mpersona`.`grupo_id` AS `grupo_id`,
+        `mpersona`.`rol_id` AS `rol_id`,
+        `mpersona`.`privilegio_id` AS `privilegio_id`,
+        `cgrupo`.`grupo_tipo` AS `grupo_tipo`,
+        `crol`.`rol_tipo` AS `rol_tipo`,
+        `cprivilegio`.`privilegio_tipo` AS `privilegio_tipo`
+    FROM
+        (((`mpersona`
+        JOIN `cgrupo` ON ((`mpersona`.`grupo_id` = `cgrupo`.`grupo_id`)))
+        JOIN `crol` ON ((`mpersona`.`rol_id` = `crol`.`rol_id`)))
+        JOIN `cprivilegio` ON ((`mpersona`.`privilegio_id` = `cprivilegio`.`privilegio_id`)))
+
+
+
+create view muestraequipo as select equipo_etiqueta, dequipo.lab_id, lab_nom, dequipo.marca_id, marca_nom, dequipo.cpu_serial, cpu_descripcion, dequipo.accesorio_id,  
+config_descripcionTeclado, config_descripcionMause, dequipo.monitor_id, monitor_descripcion, dequipo.config_id, config_descripcion,
+dequipo.edoEquipo_id, edoEquipo_tipo from dequipo join claboratorio on dequipo.lab_id=claboratorio.lab_id join cmarca on dequipo.marca_id=cmarca.marca_id
+join mcpu on dequipo.cpu_serial=mcpu.cpu_serial join maccesorio on dequipo.accesorio_id=maccesorio.accesorio_id
+join mmonitor on dequipo.monitor_id=mmonitor.monitor_id join mconfiguracion on dequipo.config_id=mconfiguracion.config_id
+join cedoequipo on dequipo.edoEquipo_id=cedoequipo.edoEquipo_id;
+
+
+
+CREATE VIEW `reporteslnt` AS
+    SELECT 
+        `muestrareporte`.`lab_nom` AS `lab_nom`,
+        COUNT(0) AS `count(*)`
+    FROM
+        `muestrareporte`
+    WHERE
+        (`muestrareporte`.`lab_nom` = 'LNT')
+
+
+CREATE VIEW `reporteslds` AS
+    SELECT 
+        `muestrareporte`.`lab_nom` AS `lab_nom`,
+        COUNT(0) AS `count(*)`
+    FROM
+        `muestrareporte`
+    WHERE
+        (`muestrareporte`.`lab_nom` = 'LDS')
+
+
+
+CREATE VIEW `reporteslbd` AS
+    SELECT 
+        `muestrareporte`.`lab_nom` AS `lab_nom`,
+        COUNT(0) AS `count(*)`
+    FROM
+        `muestrareporte`
+    WHERE
+        (`muestrareporte`.`lab_nom` = 'LBD')
+
+
+
+CREATE VIEW `reportesaula` AS
+    SELECT 
+        `muestrareporte`.`lab_nom` AS `lab_nom`,
+        COUNT(0) AS `count(*)`
+    FROM
+        `muestrareporte`
+    WHERE
+        (`muestrareporte`.`lab_nom` = '4.0')
+
+
+
+

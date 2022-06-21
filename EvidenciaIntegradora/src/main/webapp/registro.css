@@ -1,0 +1,92 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12/06/2022, 05:54:19 PM
+    Author     : Rogelio Colunga R
+*/
+html{ 
+    background-size: cover;
+    /* background-color: red; */
+    padding-top: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    background-image: url(img/fondo.jpg); 
+}
+
+.registros{
+    border-style: solid;
+    border-color: red 2px;
+    padding: 0.5rem;
+    background-color: white;
+    margin: auto;
+    width: 40%;
+    text-align: center;
+}
+
+.formulario{
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+.boton1{
+    width: 40%;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+.boton2{
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    width: 60%;
+}
+
+.espacio{
+    height: 2rem;
+}
+
+input[type=text]{
+    width: 80%;
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.datoa{
+    width: 40%;
+    text-align: left;
+}
+
+.inputa{
+    width: 60%;
+}
+
+input[type=file]{
+    width: 80%;
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+button{
+    border-radius: 0.4rem;
+    border: 1px solid grey;
+    background-color: transparent;
+    color: #3450B4;
+    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+}
+
+button:hover{
+    background-color: #3450B4;
+    color: #DCEEFF;
+}
+

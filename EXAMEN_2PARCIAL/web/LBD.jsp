@@ -18,6 +18,14 @@
         
         <h1>Laboratorio de Base de Datos</h1>
         
+        <select name="filtro" id="filtro">
+            <option value="1">Prioridad: Urgente</option>
+            <option value="2">Prioridad: Media</option>
+            <option value="3">Prioridad: No Urgente</option>
+            <option value="4">Estado: Resuelto</option>
+            <option value="5">Estado: En Proceso</option>
+        </select>
+        
         <table border="2" class="LBD">
             <thead>
                 <tr>
@@ -58,17 +66,41 @@
                 con = DriverManager.getConnection(url, username, password);
                 
                 try{
+                    
+                    int filtro = Integer.parseInt(request.getParameter("filtro"));
+                    
                     String q = "select id_dreporte as 'Reporte',fecha as 'Fecha', hora as 'Hora', problema as 'Problema', tipo as 'Estado', "
                             + "nombre as 'Asignatura', nombre_grupo as 'Grupo', tipo_prioridad as 'Prioridad', nombre_persona as 'Persona', "
                             + "mequipo_id_equipo as 'Etiqueta Equipo' from dreporte left join cestadoreporte on cestadoreporte_id_cer=id_cer "
                             + "left join casignatura on casignatura_id_asignatura=id_asignatura left join cgrupo on cgrupo_id_grupo=id_grupo"
                             + " left join cprioridad on cprioridad_id_prioridad=id_prioridad left join mpersona on mpersona_numero_empleado=numero_empleado";
                     
-                    set = con.createStatement();
+                            set = con.createStatement();
                     
-                    rs = set.executeQuery(q);
+                            rs = set.executeQuery(q);
+                            
+                            while(rs.next()){
                     
-                    while(rs.next()){
+                    switch(filtro){
+                            
+                        case 1:{
+                            String a = "select id_dreporte as 'Reporte',fecha as 'Fecha', hora as 'Hora', problema as 'Problema', tipo as 'Estado', nombre as "
+                            + "'Asignatura', nombre_grupo as 'Grupo', tipo_prioridad as 'Prioridad', nombre_persona as 'Persona', mequipo_id_equipo as "
+                            + "'Etiqueta Equipo', claboratorio_id_lab as 'id_laboratorio' from dreporte left join cestadoreporte on cestadoreporte_id_cer=id_cer "
+                            + "left join casignatura on casignatura_id_asignatura=id_asignatura left join cgrupo on cgrupo_id_grupo=id_grupo left join }"
+                            + "cprioridad on cprioridad_id_prioridad=id_prioridad left join mpersona on mpersona_numero_empleado=numero_empleado left join mequipo "
+                            + "on mequipo_id_equipo=id_equipo where tipo_prioridad='Urgente'";
+                            
+                            set = con.createStatement();
+                    
+                            rs = set.executeQuery(a);
+                            
+                            break;
+                        }
+                    }
+                    
+                    
+                    
                     
                     
                     
